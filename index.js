@@ -15,25 +15,6 @@ bgImage.onload = function () {
 };
 bgImage.src = "images/football-field.jpg";
 
-
-// border image L-R
-var blReady = false;
-var blImage = new Image();
-blImage.onload = function () {
-	blReady = true;
-};
-blImage.src = "images/BorderLeft.jpg";
-
-// border image T-B
-var btReady = false;
-var btImage = new Image();
-btImage.onload = function () {
-	btReady = true;
-};
-btImage.src = "images/BorderTop.jpg";
-
-
-
 // Hero image
 var heroReady = false;
 var heroImage = new Image();
@@ -52,6 +33,7 @@ monsterImage.onload = function () {
 };
 
 monsterImage.src = "images/angry-referee-small.png";
+
 
 var netReady = false;
 var netImage = new Image();
@@ -82,6 +64,8 @@ var net = {
 	y:0,
 	score: 0
 };
+
+
 var monstersCaught = 0;
 
 // Handle keyboard controls
@@ -108,12 +92,8 @@ var reset = function () {
 	hero.y = canvas.height / 2;
 
 	//Place the monster somewhere on the screen randomly
-	monster.x = 32 + (Math.random() * (canvas.width - 320));
+	monster.x = 32 + (Math.random() * (canvas.width - 400));
 	monster.y = 32 + (Math.random() * (canvas.height - 200));
-
-	if(net.score === 5) {
-		alert("you won!!");
-	}
 };
 
 // Update game objects
@@ -159,7 +139,7 @@ var update = function (modifier) {
 	//55 w  60 h
 	// station 83 w 81 h
 	if (
-		hero.x+5 <= (monster.x + 270)
+		hero.x+5 <= (monster.x + 200)
 		&& monster.x <= (hero.x + 55)
 		&& hero.y <= (monster.y + 180)
 		&& monster.y <= (hero.y + 52)
@@ -187,6 +167,7 @@ var render = function () {
 
 	if (monsterReady) {
 		ctx.drawImage(monsterImage, monster.x, monster.y);
+
 	}
 	
 
@@ -212,15 +193,20 @@ var main = function () {
 	render();
 	then = now;
 
-	if (monstersCaught < 3) {
+	if(net.score == 5) {
+		alert("you won!!");
+	}
+
+	else if (monstersCaught < 2) {
 	//  Request to do this again ASAP
 	requestAnimationFrame(main);
 	}
+
 	else {
 		soundFx.src = loseSound;
 		soundFx.play();
 		alert("you lost...");
-	}
+		}
 };
 
 // Cross-browser support for requestAnimationFrame
