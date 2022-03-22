@@ -100,8 +100,8 @@ var reset = function () {
 var update = function (modifier) {
 	if (38 in keysDown) { // Player holding up
 		hero.y -= hero.speed * modifier;
-		if ((hero.y < ( 32) && hero.x < 353) || (hero.y < ( 32) && hero.x > 453)) {
-			hero.y = 32;
+		if ((hero.y < ( 85) && hero.x < 353) || (hero.y < ( 85) && hero.x > 453)) {
+			hero.y = 85;
 		}
 
 		if ((hero.y < ( 32) && hero.x > 353) && (hero.y < ( 32) && hero.x < 453)) {
